@@ -118,15 +118,15 @@ public class BoardController {
 	
 	
 	
-	
+	/*
 	//테스트로 만들어봄
 		@RequestMapping("board/board_select")
 		public ModelAndView select() {
 			ModelAndView mv = new ModelAndView();
 			List<BoardVo> list = service.select("1");
 			mv.addObject("list", list);
-			mv.setViewName("board/board_select");  /* WEB-INF/view/board/board_select.jsp */
+			mv.setViewName("board/board_select");  /* WEB-INF/view/board/board_select.jsp 
 			return mv;
 		}
-	
+	*/
 }

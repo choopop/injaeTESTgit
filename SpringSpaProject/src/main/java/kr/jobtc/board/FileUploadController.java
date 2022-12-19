@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@RestController
 public class FileUploadController {
-	static String path= "C:\\Users\\LG\\eclipse-workspace\\SpringSpaProject\\src\\main\\resources\\static\\upload\\";
+	static String path= "C:\\git-2208\\SpringSpaProject\\src\\main\\resources\\static\\upload\\";
 	//해당 첨부파일을 이용하는(미리보기하기위해) board_view.jsp의 img태그(<img src='/upload/${att.sysFile}'/> )에서
 	//위 코드를 통해 이미지를 불러오는걸로 코딩해놔서 파일업로드도 위 경로로 파일이 생성되도록 설정해줌
 	//application-properties에서 spring.mvc.static-locations=/resources/**   으로 static-locations를 지정해줬기때문에 정적은 위 경로로 설정해준다..?
@@ -46,8 +46,9 @@ public class FileUploadController {
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		//return "redirect:/board/board_select";		//파일업로드되고나서 다시 셀렉트페이지로 연결시키는 코드임.
-		return msg;
+		//return "redirect:/board/board_select";		//파일업로드되고나서 다시 셀렉트페이지로 연결시키는 코드임.그냥 51행을통해진행
+		
+		return msg;//board.js에서 .btnInsertR의 $.ajax문 success : function(data)로 msg가 리턴됌
 	}
 	
 	
@@ -57,7 +58,6 @@ public class FileUploadController {
 	public String updateR(@RequestParam(name="attFile") List<MultipartFile> mul,
 				@ModelAttribute BoardVo bVo,@ModelAttribute PageVo pVo,
 				@RequestParam(name="delFile", required= false) String[] delFile) {
-		System.out.println("attList 업데이트테스트입니다:" + delFile);
 		String msg="";
 		try {
 			List<AttVo> attList = fileupload(mul);
@@ -69,7 +69,7 @@ public class FileUploadController {
 		
 		if(!flag) msg ="수정중 오류 발생";
 		
-		return msg;
+		return msg;	
 		
 	}
 	//file upload 하는 공통 메서드를 따로 빼서 만듬(insertR, updateR, replR 에서 계속쓰이기때문에 공통 메서드로 만들어서 코드량을 줄이기위함.)
@@ -110,26 +110,27 @@ public class FileUploadController {
 	public synchronized String replR(@RequestParam("attFile") List<MultipartFile> mul,
 						 @ModelAttribute BoardVo bVo, @ModelAttribute PageVo pVo) {
 		
+		String msg ="";
 		try {
 			List<AttVo> attList = new ArrayList<AttVo>();
 			attList = fileupload(mul);
-			bVo.setAttList(attList);			
+			bVo.setAttList(attList);
+			
 			//본문 내용을 저장하는 프로세스
 			boolean flag = service.replR(bVo);	
+			if(!flag) msg = "저장중오류발생";
 			
-			if(!flag) return "저장중오류발생";
-			attList = fileupload(mul);	
-			
-			for(MultipartFile m : mul) {
-				//fileupload 부분이 insertR,updateR,replR 에서 계속쓰이기때문에 따로 fileupload라는 메서드로 만들어서 코드를 간소화했다
-				if(!m.isEmpty()) {
-					service.insertAttList(attList);
-				}
-			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return "redirect:/board/board_select";		//파일업로드되고나서 다시 셀렉트페이지로 연결시키는 코드임.
+		
+		
+		return msg;		
 	}
 
+	
+	
+	
+	
+	
 }

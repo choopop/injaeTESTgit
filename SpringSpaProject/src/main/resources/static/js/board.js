@@ -51,9 +51,9 @@
 	        dataType : 'html',
             success : function(data){
 			if(data != '') alert(data);
-			frm.enctype='';
+			frm.enctype='';	//enctype이 multipart/form-data으로 되어있어 
 			param = $(frm).serialize();
-            $('#section').load('/board/board_select',param);
+            $('#section').load('/board/board_select2',param);
         }
 	       
 	       /*
@@ -88,7 +88,7 @@
 			if(data != '') alert(data);
 			frm.enctype='';
 			param = $(frm).serialize();
-            $('#section').load('/board/board_select',param);
+            $('#section').load('/board/board_select2',param);
         }
 	        /*
 	        success : function(data){
@@ -122,7 +122,7 @@
 				if(data != '') alert(data);
 				frm.enctype='';
 				param = $(frm).serialize();
-	            $('#section').load('/board/board_select',param);
+	            $('#section').load('/board/board_select2',param);
 	        }
 	        
 	        

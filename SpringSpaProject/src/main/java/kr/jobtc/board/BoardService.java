@@ -46,6 +46,7 @@ public class BoardService {
 			manager.commit(status);
 		}else {
 			status.rollbackToSavepoint(savePoint);
+			
 			String[] delFiles = new String[vo.getAttList().size()];
 			for(int i=0; i<vo.getAttList().size(); i++) {
 				delFiles[i] = vo.getAttList().get(i).getSysFile();
@@ -124,6 +125,12 @@ public class BoardService {
 	            }
 	        }else {
 	        	status.rollbackToSavepoint(savePoint);
+	        	
+	        	delFiles = new String[bVo.getAttList().size()];
+	        	for(int i=0; i<bVo.getAttList().size(); i++) {
+	        		delFiles[i] = bVo.getAttList().get(i).getSysFile();
+	        	}
+	        	fileDelete(delFiles);
 	        }
 	        return b;
 	 }
