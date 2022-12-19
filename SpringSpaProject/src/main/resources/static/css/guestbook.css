@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+/*items영역*/
+
+/*
+display:flex
+-아이템들이 기본적으로 가로 방향 배치. 넓이는 내용물 크기만큼 자동으로설정
+-아이템들의 높이 만큼 자동으로 설정
+
+container 속성
+1)flex-direction : row | column
+2)flex-wrap : nowrap | wrap
+3)justify-content : 아이템들의 좌우 정렬 방법
+4)align-items : 아이템들의 상하정렬 방법
+5)align-context : 아이템들이 wrap이 설정된 상태에서 상하 방향을 설정
+
+item 속성
+flex-basis  : item의 기본 크기를 지정 (디렉션의 종류에 따라서 달라질 수 있음)
+flex-grow   : 비율값으로 넓이 조정
+flex-shrink : 기본크기를 지정해주는 flex-basis의 크기 이하로 줄어들 수 있는지 가능 여부를 정함
+align-self  : item의 상하 정렬 방식 (container의 높이가 지정되어 있을 때 사용)
+*/
+#guestbook_list{/*아이템들을갖고있는 부모 ; container라고함*/
+	display: flex;
+	flex-direction : column; /*column:위아래로 정렬 */ 
+	 /* flex-direction : row;  row:좌우로 정렬 */
+}
+
+.ddd {
+	width: 300px;
+	height: 300px;
+	border:1px solid #aaa;
+}
+.guestbook_items{
+	flex-basis:auto;
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	justify-content: space-around;
+	align-content:center;
+}
+.guestbook_btn{
+	flex-basis:1; /*1배수를 나타냄*/
+}
+.item{
+	background-color : #ccc;
+	padding:20px;
+	min-width:200px;
+	margin-bottom:10px;
+	border-radius:14px;
+	box-shadow: 4px 4px 6px #999;
+}
+
+.guestbook_items .frm_guestbook{
+	position: relative;	
+}
+
+.guestbook_items .frm_guestbook .btnzone{
+	position: absolute;
+	right : 0px;
+	top : 0px;	
+}
+
+.guestbook_items .frm_guestbook .updateZone{
+	visibility: hidden;
+}
+/*암호를 입력하는 model box(투명div width,height를 100% 로줘서 화면을 다 모달로채움----------------*/
+#modal{
+	background-color: rgba(0,0,0,.3);
+	position: fixed;
+	left :0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:100;
+	display:none;
+}
+
+#modal>#content{
+	width:300px;
+	margin:250px auto;
+	padding:20px;
+	position: relative;
+	background-color:#fff;
+}
+
+#modal>#content #btnClose{
+	position:absolute;
+	right:2px;
+	top:2px;
+	font-size:2em;
+	background-color:transparent;
+	border:0;
+}

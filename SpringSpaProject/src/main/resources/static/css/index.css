@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#index > *{
+	box-sizing: border-box;
+}
+#index> header{
+	width:1000px;
+    margin:30px auto;
+    border:3px solid #aaa;
+    border-radius: 6px;
+    position : relative;
+}
+#index> header>nav{
+	position : absolute;
+	right: 5px;
+	bottom: 5px;
+}
+#index> #sectionlayout{
+	width:1000px;
+    margin:30px auto;
+    border:3px solid #aaa;
+    border-radius: 6px;
+    position : relative;
+} 
+#sectionright{
+	position:absolute;
+	right:80px;
+	top: 5px;
+	 border:2px dotted #aaa;
+	 height: 250px;
+	 width: 400px;
+}
+#sectionleft{
+	position:absolute;
+	left:80px;
+	top: 5px;
+	 border:2px dotted #aaa;
+	  height: 250px;
+	  width: 400px;
+}
